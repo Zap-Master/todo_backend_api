@@ -1,0 +1,14 @@
+service: todo-backend-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-2
+  profile: serverless
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - http: ANY /
