@@ -55,5 +55,36 @@ app.post('/createTask', (request, response) => {
     )
 })
 
+//update task
+app.put('/updateTask/:taskId', (request, response) => {
+    const taskId = request.params.taskId;
+    const data = request.body;
+    const sql = 'UPDATE todo.Tasks SET taskName = ?,  dueDate = ?, complete = ?, description = ? WHERE taskId = ?';
+    pool.query(
+        sql,
+        [data.taskName, data.dueDate, data.complete, data.description, data.taskId],
+        (err, results) => {
+            if (err) {
+                console.log('Error from MySQL', err);
+                response.status(500).send(err);
+            } else {
+                //send back updated task
+                pool.query(
+                    'SELECT * FROM todo.Tasks t WHERE t.taskId = ?',
+                    [data.taskId],
+                    (err, results) => {
+                        if (err) {
+                            console.log('Error from MySQL', err);
+                            response.status(500).send(err);
+                        } else {
+                            response.status(201).send(results[0]);
+                        }
+                    }
+                )
+            }
+        }
+        )
+})
+
 
 module.exports.handler = serverless(app);

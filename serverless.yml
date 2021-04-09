@@ -25,4 +25,9 @@ functions:
           path: /createTask
           method: POST
           cors: true
+      - http:
+          path: /updateTask/{taskId}
+          method: PUT
+          cors: true
+          
 
