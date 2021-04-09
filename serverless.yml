@@ -21,4 +21,8 @@ functions:
           path: /tasks/{userId}
           method: GET
           cors: true
+      - http:
+          path: /createTask
+          method: POST
+          cors: true
 
