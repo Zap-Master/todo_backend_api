@@ -29,5 +29,9 @@ functions:
           path: /updateTask/{taskId}
           method: PUT
           cors: true
+      - http:
+          path: /deleteTask/{taskId}
+          method: DELETE
+          cors: true
           
 
