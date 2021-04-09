@@ -17,11 +17,6 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-console.log("------" + process.env.DB_NAME + "----------");
-console.log("------" + process.env.DB_USER + "----------");
-console.log("------" + process.env.DB_PASSWORD + "----------");
-console.log("------" + process.env.DB_NAME + "----------");
-
 app.get("/tasks", function (request, response) {
     connection.query("SELECT * FROM Tasks", function (err, data) {
       if (err) {
