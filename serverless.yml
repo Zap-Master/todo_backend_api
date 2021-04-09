@@ -18,7 +18,7 @@ functions:
     handler: index.handler
     events:
       - http:
-          path: /tasks
+          path: /tasks/{userId}
           method: GET
           cors: true
 

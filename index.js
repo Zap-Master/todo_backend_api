@@ -17,14 +17,16 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-app.get("/tasks", function (request, response) {
-    connection.query("SELECT * FROM Tasks", function (err, data) {
-      if (err) {
-        console.log("Error from MySQL", err);
-        response.status(500).send(err);
-      } else {
-        response.status(200).send(data);
-      }
+app.get("/tasks/:userId", function (request, response) {
+    const userId = request.params.userId;
+    const sql = "SELECT * FROM todo.Tasks t WHERE t.userId = ?";
+    connection.query(sql, [userId],(err, data) => {
+        if (err) {
+            console.log("Error from MySQL", err);
+            response.status(500).send(err);
+        } else {
+            response.status(200).send(data);
+        }
     });
   });
 
