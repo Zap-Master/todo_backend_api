@@ -8,7 +8,11 @@ provider:
   profile: serverless
 
 functions:
-  app:
+  tasks:
     handler: index.handler
     events:
-      - http: ANY /
+      - http:
+          path: /tasks
+          method: GET
+          cors: true
+
