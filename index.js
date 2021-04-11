@@ -86,5 +86,18 @@ app.put('/updateTask/:taskId', (request, response) => {
         )
 })
 
+//delete task
+app.delete('/deleteTask/:taskId', (request, response) => {
+    const sql = 'DELETE FROM todo.Tasks WHERE taskId = ?';
+    pool.query(sql, [request.params.taskId], (err) => {
+        if (err) {
+            console.log('Error from MySQL', err);
+            response.status(500).send(err);
+        } else {
+            response.status(200).send("Task deleted");
+        }
+    })
+})
+
 
 module.exports.handler = serverless(app);
